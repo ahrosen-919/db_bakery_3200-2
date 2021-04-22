@@ -17,6 +17,14 @@ public class BakedGood {
     @Column(name="gluten_free")
     private boolean glutenFree;
 
+    @OneToMany(mappedBy = "bakedGood")
+    @JsonIgnore
+    private List<Recipe> recipes;
+
+    @OneToMany(mappedBy = "bakedGood")
+    @JsonIgnore
+    private List<CartItem> cartItems;
+
 
     public BakedGood(String name, Double price, Integer calories, String type, boolean vegan, boolean glutenFree) {
         this.name = name;
@@ -67,7 +75,7 @@ public class BakedGood {
         this.type = type;
     }
 
-    public boolean isVegan() {
+    public boolean getVegan() {
         return vegan;
     }
 
@@ -75,7 +83,7 @@ public class BakedGood {
         this.vegan = vegan;
     }
 
-    public boolean isGlutenFree() {
+    public boolean getGlutenFree() {
         return glutenFree;
     }
 

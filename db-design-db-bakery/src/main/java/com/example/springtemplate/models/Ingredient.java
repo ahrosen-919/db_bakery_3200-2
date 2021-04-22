@@ -12,6 +12,11 @@ public class Ingredient {
     private Integer price;
     private String brand;
 
+    @OneToMany(mappedBy = "ingredient")
+    @JsonIgnore
+    private List<Recipe> recipes;
+
+
     public Ingredient(String name, Integer price, String brand) {
         this.name = name;
         this.price = price;

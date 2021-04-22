@@ -20,6 +20,10 @@ public class Customer {
     private Date dateOfBirth;
     private boolean rewards;
 
+    @OneToMany(mappedBy = "customer")
+    @JsonIgnore
+    private List<CartItem> cartItems;
+
     public Integer getId() {
         return id;
     }
