@@ -12,7 +12,8 @@ public class BakedGood {
     private String name;
     private Double price;
     private Integer calories;
-    private String type; // figure out how to do enumeration
+    @Enumerated(EnumType.STRING)
+    private Type type;
     private boolean vegan;
     @Column(name="gluten_free")
     private boolean glutenFree;
@@ -26,7 +27,7 @@ public class BakedGood {
     private List<CartItem> cartItems;
 
 
-    public BakedGood(String name, Double price, Integer calories, String type, boolean vegan, boolean glutenFree) {
+    public BakedGood(String name, Double price, Integer calories, Type type, boolean vegan, boolean glutenFree) {
         this.name = name;
         this.price = price;
         this.calories = calories;
@@ -67,11 +68,11 @@ public class BakedGood {
         this.calories = calories;
     }
 
-    public String getType() {
+    public Type getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(Type type) {
         this.type = type;
     }
 

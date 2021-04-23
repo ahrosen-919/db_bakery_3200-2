@@ -9,14 +9,6 @@ public class Recipe {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private Integer amount;
-    @Column(name="ingredient_id")
-    private Integer ingredientId;
-    @Column(name="baked_good_id")
-    private Integer bakedGoodId;
-
-    // Is @ManyToOne apply to an Object or a Primitive type data?
-    // In Sections.java @ManyToOne applies to an Object instead of a primitive integer ID
-    // If that is the case do we still need the field for ingredientId and bakedGoodId?
 
     @ManyToOne
     @JsonIgnore
@@ -25,12 +17,10 @@ public class Recipe {
     @JsonIgnore
     private BakedGood bakedGood;
 
-
-
-    public Recipe(Integer amount, Integer ingredientId, Integer bakedGoodId) {
+    public Recipe(Integer amount, Ingredient ingredient, BakedGood bakedGood) {
         this.amount = amount;
-        this.ingredientId = ingredientId;
-        this.bakedGoodId = bakedGoodId;
+        this.ingredient = ingredient;
+        this.bakedGood = bakedGood;
     }
 
     public Recipe() {
@@ -53,34 +43,20 @@ public class Recipe {
         this.amount = amount;
     }
 
-        public Integer getIngredient() {
-        return ingredientId;
-    }
-
-    public void setIngredient(Integer ingredient) {
+    public void setIngredient(Ingredient ingredient) {
         this.ingredient = ingredient;
     }
 
-    public Integer getBakedGood() {
+    public BakedGood getBakedGood() {
         return bakedGood;
     }
 
-    public void setBakedGood(Integer bakedGood) {
+    public void setBakedGood(BakedGood bakedGood) {
         this.bakedGood = bakedGood;
     }
-    public Integer getIngredient() {
+
+    public Ingredient getIngredient() {
         return ingredient;
     }
 
-//    public void setIngredientId(Integer ingredientId) {
-//        this.ingredientId = ingredientId;
-//    }
-
-//    public Integer getBakedGoodId() {
-//        return bakedGoodId;
-//    }
-//
-//    public void setBakedGoodId(Integer bakedGoodId) {
-//        this.bakedGoodId = bakedGoodId;
-//    }
 }

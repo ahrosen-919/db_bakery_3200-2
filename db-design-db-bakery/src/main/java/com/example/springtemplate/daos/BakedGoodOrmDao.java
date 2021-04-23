@@ -27,14 +27,7 @@ public class BakedGoodOrmDao {
             @PathVariable("bakedGoodId") Integer id) {
         return bakedGoodRepository.findBakedGoodById(id);
     }
-//    private Integer id;
-//    private String name;
-//    private Double price;
-//    private Integer calories;
-//    private String type; // figure out how to do enumeration
-//    private boolean vegan;
-//    @Column(name="gluten_free")
-//    private boolean glutenFree;
+
 
     @PutMapping("/api/bakedGoods/{bakedGoodId}")
     public BakedGood updateBakedGood(
@@ -44,8 +37,7 @@ public class BakedGoodOrmDao {
         bakedGood.setName(bakedGoodUpdates.getName());
         bakedGood.setPrice(bakedGoodUpdates.getPrice());
         bakedGood.setCalories(bakedGoodUpdates.getCalories());
-        // not sure about enumeration datatype
-        //bakedGood.setType(bakedGoodUpdates.getType());
+        bakedGood.setType(bakedGoodUpdates.getType());
         bakedGood.setVegan(bakedGoodUpdates.getVegan());
         bakedGood.setGlutenFree(bakedGoodUpdates.getGlutenFree());
 
