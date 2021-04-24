@@ -1,11 +1,12 @@
 package com.example.springtemplate.daos;
 
 import com.example.springtemplate.models.CartItem;
-import com.example.springtemplate.models.Ingredient;
+import com.example.springtemplate.models.Customer;
 import com.example.springtemplate.models.BakedGood;
 import com.example.springtemplate.repositories.CartItemRepository;
 import com.example.springtemplate.repositories.BakedGoodRepository;
-import com.example.springtemplate.repositories.IngredientRepository;
+import com.example.springtemplate.repositories.CustomerRepository;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -49,45 +50,41 @@ public class CartItemOrmDao {
             @RequestBody CartItem cartItem) {
         cartItem = cartItemRepository.save(cartItem);
         Customer customer = customerRepository.findById(cid).get();
-        BakedGood bakedGood = BakedGoodRepository.findById(bid).get();
+        BakedGood bakedGood = bakedGoodRepository.findById(bid).get();
         cartItem.setCustomer(customer);
         cartItem.setBakedGood(bakedGood);
         return cartItemRepository.save(cartItem);
     }
 
-    @GetMapping("/api/customers/{cid}/cartItems")
-    public List<CartItem> findCartItemsForCustomer(
-            @PathVariable("cid") Integer customerId) {
-        Customer customer = customerRepository.findById(customerId).get();
-        return customer.getCartItems();
+    @GetMapping("/api/bakedGoods/{bid}/cartItems")
+    public List<CartItem> findCartItemsForBakedGood(
+            @PathVariable("bid") Integer bakedGoodId) {
+        BakedGood bakedGood = bakedGoodRepository.findById(bakedGoodId).get();
+        return bakedGood.getCartItems();
     }
     
-    @GetMapping("/api/CartItems/{CartItemId}")
+    @GetMapping("/api/cartItems/{cartItemId}")
     public CartItem findCartItemById(
-            @PathVariable("CartItemId") Integer id) {
-        return CartItemRepository.findCartItemById(id);
+            @PathVariable("cartItemId") Integer id) {
+        return cartItemRepository.findCartItemById(id);
     }
 
-    @PutMapping("/api/CartItems/{CartItemId}")
+    @PutMapping("/api/cartItems/{cartItemId}")
     public CartItem updateCartItem(
-            @PathVariable("CartItemId") Integer id,
-            @RequestBody CartItem CartItemUpdates) {
-        CartItem CartItem = CartItemRepository.findCartItemById(id);
-        CartItem.setName(CartItemUpdates.getName());
-        CartItem.setPrice(CartItemUpdates.getPrice());
-        CartItem.setCalories(CartItemUpdates.getCalories());
-        // not sure about enumeration datatype
-        //CartItem.setType(CartItemUpdates.getType());
-        CartItem.setVegan(CartItemUpdates.getVegan());
-        CartItem.setGlutenFree(CartItemUpdates.getGlutenFree());
+            @PathVariable("cartItemId") Integer id,
+            @RequestBody CartItem cartItemUpdates) {
+        CartItem cartItem = cartItemRepository.findCartItemById(id);
+        cartItem.setQuantity(cartItemUpdates.getQuantity());
+        cartItem.setCustomer(cartItemUpdates.getCustomer());
+        cartItem.setBakedGood(cartItemUpdates.getBakedGood());
 
-        return CartItemRepository.save(CartItem);
+        return cartItemRepository.save(cartItem);
     }
 
-    @DeleteMapping("/api/CartItems/{CartItemId}")
+    @DeleteMapping("/api/cartItems/{cartItemId}")
     public void deleteCartItem(
-            @PathVariable("CartItemId") Integer id) {
-        CartItemRepository.deleteById(id);
+            @PathVariable("cartItemId") Integer id) {
+        cartItemRepository.deleteById(id);
     }
 }
 

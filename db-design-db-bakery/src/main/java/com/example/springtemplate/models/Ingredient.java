@@ -1,6 +1,9 @@
 package com.example.springtemplate.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="ingredients")
@@ -17,10 +20,11 @@ public class Ingredient {
     private List<Recipe> recipes;
 
 
-    public Ingredient(String name, Integer price, String brand) {
+    public Ingredient(String name, Integer price, String brand, List<Recipe> recipes) {
         this.name = name;
         this.price = price;
         this.brand = brand;
+        this.recipes = recipes;
     }
 
     public Integer getId() {
@@ -53,6 +57,14 @@ public class Ingredient {
 
     public void setBrand(String brand) {
         this.brand = brand;
+    }
+
+    public List<Recipe> getRecipes() {
+        return recipes;
+    }
+
+    public void setRecipes(List<Recipe> recipes) {
+        this.recipes = recipes;
     }
 
     public Ingredient() {}

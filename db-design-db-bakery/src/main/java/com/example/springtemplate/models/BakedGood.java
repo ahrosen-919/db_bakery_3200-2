@@ -1,7 +1,10 @@
 package com.example.springtemplate.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.List;
 
 @Entity
 @Table(name="baked_goods")
@@ -27,13 +30,16 @@ public class BakedGood {
     private List<CartItem> cartItems;
 
 
-    public BakedGood(String name, Double price, Integer calories, Type type, boolean vegan, boolean glutenFree) {
+    public BakedGood(String name, Double price, Integer calories, Type type, boolean vegan,
+                     boolean glutenFree, List<Recipe> recipes, List<CartItem> cartItems) {
         this.name = name;
         this.price = price;
         this.calories = calories;
         this.type = type;
         this.vegan = vegan;
         this.glutenFree = glutenFree;
+        this.recipes = recipes;
+        this.cartItems = cartItems;
     }
 
     public Integer getId() {
@@ -90,6 +96,22 @@ public class BakedGood {
 
     public void setGlutenFree(boolean glutenFree) {
         this.glutenFree = glutenFree;
+    }
+
+    public List<Recipe> getRecipes() {
+        return recipes;
+    }
+
+    public void setRecipes(List<Recipe> recipes) {
+        this.recipes = recipes;
+    }
+
+    public List<CartItem> getCartItems() {
+        return cartItems;
+    }
+
+    public void setCartItems(List<CartItem> cartItems) {
+        this.cartItems = cartItems;
     }
 
     public BakedGood() {}

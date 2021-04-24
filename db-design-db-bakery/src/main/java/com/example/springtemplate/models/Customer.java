@@ -1,7 +1,10 @@
 package com.example.springtemplate.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.List;
 
 @Entity
 @Table(name="customers")
@@ -88,8 +91,16 @@ public class Customer {
         this.rewards = rewards;
     }
 
+    public List<CartItem> getCartItems() {
+        return cartItems;
+    }
+
+    public void setCartItems(List<CartItem> cartItems) {
+        this.cartItems = cartItems;
+    }
+
     public Customer(String username, String password, String first_name, String last_name, String email,
-                    Date dateOfBirth, boolean rewards) {
+                    Date dateOfBirth, boolean rewards, List<CartItem> cartItems) {
         this.username = username;
         this.password = password;
         this.firstName = first_name;
@@ -97,6 +108,7 @@ public class Customer {
         this.email = email;
         this.dateOfBirth = dateOfBirth;
         this.rewards = rewards;
+        this.cartItems = cartItems;
     }
 
     public Customer() {}

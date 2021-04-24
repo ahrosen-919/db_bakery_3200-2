@@ -1,5 +1,7 @@
 package com.example.springtemplate.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -45,19 +47,19 @@ public class CartItem {
         this.quantity = quantity;
     }
 
-    public Integer getBakedGood() {
+    public BakedGood getBakedGood() {
         return bakedGood;
     }
 
-    public void setBakedGood(Integer bakedGood) {
+    public void setBakedGood(BakedGood bakedGood) {
         this.bakedGood = bakedGood;
     }
 
-    public Integer getCustomer() {
+    public Customer getCustomer() {
         return customer;
     }
 
-    public void setCustomer(Integer customer) {
+    public void setCustomer(Customer customer) {
         this.customer = customer;
     }
 

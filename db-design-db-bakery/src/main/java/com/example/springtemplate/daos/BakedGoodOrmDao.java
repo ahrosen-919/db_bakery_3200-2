@@ -40,6 +40,8 @@ public class BakedGoodOrmDao {
         bakedGood.setType(bakedGoodUpdates.getType());
         bakedGood.setVegan(bakedGoodUpdates.getVegan());
         bakedGood.setGlutenFree(bakedGoodUpdates.getGlutenFree());
+        bakedGood.setRecipes(bakedGoodUpdates.getRecipes());
+        bakedGood.setCartItems(bakedGoodUpdates.getCartItems());
 
         return bakedGoodRepository.save(bakedGood);
     }
