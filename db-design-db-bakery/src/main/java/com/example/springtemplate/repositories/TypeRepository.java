@@ -1,4 +1,4 @@
-package com.example.springtemplate.repositories;
+/*package com.example.springtemplate.repositories;
 
 import com.example.springtemplate.models.Type;
 import org.springframework.data.jpa.repository.Query;
@@ -15,4 +15,4 @@ public interface TypeRepository
     @Query(value = "SELECT * FROM types WHERE id=:typeId",
             nativeQuery = true)
     public Type findTypeById(@Param("typeId") String type);
-}
+}*/

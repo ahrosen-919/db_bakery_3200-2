@@ -3,7 +3,7 @@ const {useState, useEffect} = React;
 const {useParams, useHistory} = window.ReactRouterDOM;
 const CustomerFormEditor = () => {
  const {id} = useParams()
-   const [user, setUser] = useState({})
+   const [customer, setCustomer] = useState({})
    useEffect(() => {
         if(id !== "new") {
             findCustomerById(id)
@@ -80,7 +80,7 @@ const CustomerFormEditor = () => {
             <button onClick={() => deleteCustomer(customer.id)} className="btn btn-danger">Delete</button>
             <button onClick={() => updateCustomer(customer.id, customer)}
             className="btn btn-primary">Save</button>
-            <button onClick={() => createUser(user)} className="btn btn-success">Create</button>
+            <button onClick={() => createCustomer(customer)} className="btn btn-success">Create</button>
         </div>
     )
 }

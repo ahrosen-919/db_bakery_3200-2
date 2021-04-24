@@ -11,7 +11,7 @@ export const findAllCustomers = () =>
 
 // TODO: retrieve a single Customer by their ID
 export const findCustomerById = (id) =>
-            fetch(CUSTOMERS_URL + "/" + id)
+            fetch(`${CUSTOMERS_URL}/${id}`)
                 .then(response => response.json())
 
 

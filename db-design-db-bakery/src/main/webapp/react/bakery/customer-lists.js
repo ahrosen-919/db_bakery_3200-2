@@ -9,7 +9,7 @@ const history = useHistory()
         findAllCustomers()
     }, [])
     const findAllCustomers = () =>
-        customersService.findAllCustomers()
+        customerService.findAllCustomers()
             .then(customers => setCustomers(customers))
     return(
         <div>
@@ -24,7 +24,7 @@ const history = useHistory()
                                    <Link to={`/customers/${customer.id}`}>
                                       {customer.firstName},
                                       {customer.lastName},
-                                      {customer.username}
+                                      {customer.username},
                                       {customer.email}
                                       </Link>
                                   </li>)
