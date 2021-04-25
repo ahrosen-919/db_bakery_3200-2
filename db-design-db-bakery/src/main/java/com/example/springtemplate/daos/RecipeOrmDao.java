@@ -23,44 +23,18 @@ public class RecipeOrmDao {
     IngredientRepository ingredientRepository;
 
 
-    @PostMapping("/api/recipes")
-    public Recipe createRecipe(@RequestBody Recipe recipe) {
+    @PostMapping("/api/recipes/{ingredientId}/{bakedGoodId}")
+    public Recipe createRecipe(@PathVariable("ingredientId") Integer ingredientId,
+                               @PathVariable("bakedGoodId") Integer bakedGoodId,
+                               @RequestBody Recipe recipe) {
+        recipe.setIngredient(ingredientRepository.findIngredientById(ingredientId));
+        recipe.setBakedGood(bakedGoodRepository.findBakedGoodById(bakedGoodId));
         return recipeRepository.save(recipe);
     }
 
     @GetMapping("/api/recipes")
     public List<Recipe> findAllRecipes() {
         return recipeRepository.findAllRecipes();
-    }
-
-    @GetMapping("/api/ingredients/{cid}/recipes")
-    public List<Recipe> findRecipesForIngredient(
-            @PathVariable("cid") Integer ingredientId) {
-        Ingredient ingredient = ingredientRepository.findById(ingredientId).get();
-        return ingredient.getRecipes();
-    }
-
-    // It doesn't make sense to have bakedGoodId referencing a recipe?
-    // would the below be a better api url?
-    // api/ingredient/{ingredientId}/bakedGoods/{bakedGoodId}/recipes/recipe/2
-    @PostMapping("/api/ingredients/{ingredientId}/recipes/{bakedGoodId}")
-    public Recipe createRecipeForBakedGood(
-            @PathVariable("ingredientId") Integer cid,
-            @PathVariable("bakedGoodId") Integer bid,
-            @RequestBody Recipe recipe) {
-        recipe = recipeRepository.save(recipe);
-        Ingredient ingredient = ingredientRepository.findById(cid).get();
-        BakedGood bakedGood = bakedGoodRepository.findById(bid).get();
-        recipe.setIngredient(ingredient);
-        recipe.setBakedGood(bakedGood);
-        return recipeRepository.save(recipe);
-    }
-
-    @GetMapping("/api/bakedGoods/{bid}/recipes")
-    public List<Recipe> findRecipesForBakedGood(
-            @PathVariable("bid") Integer bakedGoodId) {
-        BakedGood bakedGood = bakedGoodRepository.findById(bakedGoodId).get();
-        return bakedGood.getRecipes();
     }
 
     @GetMapping("/api/recipes/{recipeId}")
@@ -75,8 +49,8 @@ public class RecipeOrmDao {
             @RequestBody Recipe recipeUpdates) {
         Recipe recipe = recipeRepository.findRecipeById(id);
         recipe.setAmount(recipeUpdates.getAmount());
-        recipe.setIngredient(recipeUpdates.getIngredient());
-        recipe.setBakedGood(recipeUpdates.getBakedGood());
+        recipe.setIngredient(recipe.getIngredient());
+        recipe.setBakedGood(recipe.getBakedGood());
 
         return recipeRepository.save(recipe);
     }

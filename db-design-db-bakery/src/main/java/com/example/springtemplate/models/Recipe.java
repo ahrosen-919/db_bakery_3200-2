@@ -13,10 +13,10 @@ public class Recipe {
     private Integer amount;
 
     @ManyToOne
-    @JsonIgnore
+    @JoinColumn(name = "ingredient_id", referencedColumnName = "id")
     private Ingredient ingredient;
     @ManyToOne
-    @JsonIgnore
+    @JoinColumn(name = "bakedGood_id", referencedColumnName = "id")
     private BakedGood bakedGood;
 
     public Recipe(Integer amount, Ingredient ingredient, BakedGood bakedGood) {

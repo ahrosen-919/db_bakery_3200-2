@@ -34,7 +34,7 @@ const CustomerFormEditor = () => {
         <div>
             <h2>Customer Editor</h2>
             <label>Id</label>
-            <input value={customer.id}/><br/>
+            <input value={customer.id} placeholder="Auto Generated" className="form-control"/><br/>
 
             <label>First Name</label>
             <input onChange={(e) =>
@@ -69,7 +69,7 @@ const CustomerFormEditor = () => {
             <label>Rewards</label>
             <input onChange={(e) =>
             setCustomer(customer => ({...customer, rewards: e.target.value}))}
-            value={customer.rewards} className="form-control"/>
+            value={customer.rewards} className="form-control" placeholder={"Ex: true or false"}/>
             <br/>
 
 

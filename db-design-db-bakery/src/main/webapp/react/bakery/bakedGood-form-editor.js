@@ -36,14 +36,11 @@ const findBakedGoodById = (id) => {
                                             bakedGoodService.updateBakedGood(id, newBakedGood)
                                                 .then(() => history.back())
 
-
-
-
    return (
        <div>
            <h2>BakedGood Editor</h2>
            <label>Id</label>
-           <input value={bakedGood.id}/><br/>
+           <input value={bakedGood.id} placeholder="Auto Generated" className="form-control"/><br/>
 
            <label>Name</label>
            <input onChange={(e) =>
@@ -60,20 +57,25 @@ const findBakedGoodById = (id) => {
            setBakedGood(bakedGood => ({...bakedGood, calories: e.target.value}))}
            value={bakedGood.calories} className="form-control"/>
 
-           <label>Type</label>
-           <input onChange={(e) =>
-           setBakedGood(bakedGood => ({...bakedGood, type: e.target.value}))}
-           value={bakedGood.type} className="form-control"/>
+           <label for={"enumType"}>Type</label>
+           <select name="enumType" id={"enumType"} className="form-control" onChange={(e) =>
+               setBakedGood(bakedGood => ({...bakedGood, type: e.target.value}))}
+                   value={bakedGood.type}>
+               <option value="CAKE">Cake</option>
+               <option value="COOKIE">Cookie</option>
+               <option value="BREAD">Bread</option>
+               <option value="PASTRY">Pastry</option>
+           </select>
 
            <label>Vegan</label>
            <input onChange={(e) =>
            setBakedGood(bakedGood => ({...bakedGood, vegan: e.target.value}))}
-           value={bakedGood.vegan} className="form-control"/>
+           value={bakedGood.vegan} className="form-control" placeholder={"Ex: true or false"}/>
 
            <label>Gluten Free</label>
            <input onChange={(e) =>
            setBakedGood(bakedGood => ({...bakedGood, glutenFree: e.target.value}))}
-           value={bakedGood.glutenFree} className="form-control"/>
+           value={bakedGood.glutenFree} className="form-control" placeholder={"Ex: true or false"}/>
 
            <button onClick={() => {history.back()}}
            className="btn btn-warning">Cancel</button>

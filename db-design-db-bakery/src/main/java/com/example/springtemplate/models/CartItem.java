@@ -28,7 +28,6 @@ public class CartItem {
     //private CustomerRepository customerRepository;
 
 
-
     public CartItem(Integer quantity, BakedGood bakedGood, Customer customer) {
         this.quantity = quantity;
         this.bakedGood = bakedGood;
