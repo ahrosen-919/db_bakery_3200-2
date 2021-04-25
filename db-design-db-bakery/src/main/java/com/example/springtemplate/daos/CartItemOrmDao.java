@@ -23,44 +23,20 @@ public class CartItemOrmDao {
     CustomerRepository customerRepository;
 
 
-    @PostMapping("/api/cartItems")
-    public CartItem createCartItem(@RequestBody CartItem cartItem) {
-        return cartItemRepository.save(cartItem);
+    @PostMapping("/api/cartItems/{customerId}/{bakedGoodId}")
+    public CartItem createCartItem(
+            @PathVariable("customerId") Integer cid,
+            @PathVariable("bakedGoodId") Integer bid,
+            @RequestBody CartItem cartItem) {
+
+        cartItem.setCustomer(customerRepository.findCustomerById(cid));
+        cartItem.setBakedGood(bakedGoodRepository.findBakedGoodById(bid));
+        ;return cartItemRepository.save(cartItem);
     }
 
     @GetMapping("/api/cartItems")
     public List<CartItem> findAllCartItems() {
         return cartItemRepository.findAllCartItems();
-    }
-
-    @GetMapping("/api/customers/{cid}/cartItems")
-    public List<CartItem> findCartItemsForCustomer(
-            @PathVariable("cid") Integer customerId) {
-        Customer customer = customerRepository.findById(customerId).get();
-        return customer.getCartItems();
-    }
-
-    // It doesn't make sense to have bakedGoodId referencing a cartItem?
-    // would the below be a better api url?
-    // api/customer/{customerId}/bakedGoods/{bakedGoodId}/cartItems/cartItem/2
-    @PostMapping("/api/customers/{customerId}/cartItems/{bakedGoodId}")
-    public CartItem createCartItemForBakedGood(
-            @PathVariable("customerId") Integer cid,
-            @PathVariable("bakedGoodId") Integer bid,
-            @RequestBody CartItem cartItem) {
-        cartItem = cartItemRepository.save(cartItem);
-        Customer customer = customerRepository.findById(cid).get();
-        BakedGood bakedGood = bakedGoodRepository.findById(bid).get();
-        cartItem.setCustomer(customer);
-        cartItem.setBakedGood(bakedGood);
-        return cartItemRepository.save(cartItem);
-    }
-
-    @GetMapping("/api/bakedGoods/{bid}/cartItems")
-    public List<CartItem> findCartItemsForBakedGood(
-            @PathVariable("bid") Integer bakedGoodId) {
-        BakedGood bakedGood = bakedGoodRepository.findById(bakedGoodId).get();
-        return bakedGood.getCartItems();
     }
     
     @GetMapping("/api/cartItems/{cartItemId}")
@@ -69,14 +45,16 @@ public class CartItemOrmDao {
         return cartItemRepository.findCartItemById(id);
     }
 
-    @PutMapping("/api/cartItems/{cartItemId}")
+    @PutMapping("/api/cartItems/{cartItemId}/{customerId}/{bakedGoodId}")
     public CartItem updateCartItem(
             @PathVariable("cartItemId") Integer id,
+            @PathVariable("customerId") Integer cid,
+            @PathVariable("bakedGoodId") Integer bid,
             @RequestBody CartItem cartItemUpdates) {
         CartItem cartItem = cartItemRepository.findCartItemById(id);
         cartItem.setQuantity(cartItemUpdates.getQuantity());
-        cartItem.setCustomer(cartItemUpdates.getCustomer());
-        cartItem.setBakedGood(cartItemUpdates.getBakedGood());
+        cartItem.setCustomer(customerRepository.findCustomerById(cid));
+        cartItem.setBakedGood(bakedGoodRepository.findBakedGoodById(bid));
 
         return cartItemRepository.save(cartItem);
     }

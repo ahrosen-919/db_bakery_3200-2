@@ -7,6 +7,9 @@ input.form-control {
     margin-bottom: 10px;
 }
 
+/* Require field */
+input:required { border: 1px dashed red; }
+
 .margin-bottom-10px {
     margin-bottom: 10px;
 }

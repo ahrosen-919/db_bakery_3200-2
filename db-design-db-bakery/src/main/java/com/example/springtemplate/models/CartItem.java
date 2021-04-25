@@ -1,6 +1,9 @@
 package com.example.springtemplate.models;
 
+import com.example.springtemplate.repositories.BakedGoodRepository;
+import com.example.springtemplate.repositories.CustomerRepository;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 import javax.persistence.*;
 
@@ -13,11 +16,16 @@ public class CartItem {
     private Integer quantity;
 
     @ManyToOne
-    @JsonIgnore
+
+    @JoinColumn(name = "customer_id", referencedColumnName = "id")
     private Customer customer;
     @ManyToOne
-    @JsonIgnore
+
+    @JoinColumn(name = "baked_good_id", referencedColumnName = "id")
     private BakedGood bakedGood;
+
+    //private BakedGoodRepository bakedGoodRepository;
+    //private CustomerRepository customerRepository;
 
 
 
@@ -64,4 +72,19 @@ public class CartItem {
     }
 
 
+    public Integer getCustomerId() {
+        return this.customer.getId();
+    }
+
+   /* public void setCustomer(Integer customerId) {
+        this.customer = this.customerRepository.findCustomerById(customerId);
+    }*/
+
+    public Integer getBakedGoodId() {
+        return this.bakedGood.getId();
+    }
+
+    /*public void setBakedGood(Integer bakedGoodId) {
+        this.bakedGood = this.bakedGoodRepository.findBakedGoodById(bakedGoodId);
+    }*/
 }
