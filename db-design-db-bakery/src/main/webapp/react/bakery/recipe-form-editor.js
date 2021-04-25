@@ -36,21 +36,21 @@ const RecipeFormEditor = () => {
         <div>
             <h2>Recipe Editor</h2>
             <label>Id</label>
-            <input value={recipe.id}/><br/>
+            <input value={recipe.id} placeholder="Auto Generated" className="form-control"/><br/>
 
             <label>Amount</label>
             <input onChange={(e) =>
                 setRecipe(recipe => ({...recipe, amount: e.target.value}))}
                    value={recipe.amount} className="form-control"/>
-            <label>Ingredient</label>
+            <label>Ingredient ID</label>
             <input onChange={(e) => ingredientId = (e.target.value)}
                  //setRecipe(recipe => ({...recipe, amount: e.target.value}))
 
-                   value={recipe.ingredient.id} className="form-control"/>
-            <label>Baked Good</label>
+                   value={recipe.ingredient.id} className="form-control" placeholder="Number ex: 1"/>
+            <label>Baked Good ID</label>
             <input onChange={(e) => bakedGoodId = (e.target.value)}
                 //setRecipe(recipe => ({...recipe, amount: e.target.value}))}
-                   value={recipe.bakedGood.id} className="form-control"/>
+                   value={recipe.bakedGood.id} className="form-control" placeholder="Number ex: 1"/>
             <br/>
 
             <button onClick={() => {history.back()}}

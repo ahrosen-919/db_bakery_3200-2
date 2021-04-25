@@ -5,19 +5,27 @@ import IngredientFormEditor from "./ingredient-form-editor";
 import RecipeList from "./recipe-lists";
 import RecipeFormEditor from "./recipe-form-editor";
 
-
 import CartItemList from "./cartItem-lists";
 import CartItemFormEditor from "./cartItem-form-editor";
+import BakedGoodList from "./bakedGood-lists";
+import BakedGoodFormEditor from "./bakedGood-form-editor";
+
 const {HashRouter, Route} = window.ReactRouterDOM; 
 const App = () => {
     return (
         <div className="container-fluid">
             <HashRouter>
-                <Route path={["/cartItems", "/"]} exact={true}>
-                    <CartItemList/>
+                <Route path={["/customers","/"]} exact={true}>
+                    <CustomerList/>
                 </Route>
-                <Route path="/cartItems/:id" exact={true}>
-                    <CartItemFormEditor/>
+                <Route path="/customers/:id" exact={true}>
+                    <CustomerFormEditor/>
+                </Route>
+                <Route path={["/bakedGoods","/"]} exact={true}>
+                    <BakedGoodList/>
+                </Route>
+                <Route path="/bakedGoods/:id" exact={true}>
+                    <BakedGoodFormEditor/>
                 </Route>
                 <Route path={["/ingredients","/"]} exact={true}>
                     <IngredientList/>
@@ -30,6 +38,12 @@ const App = () => {
                 </Route>
                 <Route path="/recipes/:id" exact={true}>
                     <RecipeFormEditor/>
+                </Route>
+                <Route path={["/cartItems", "/"]} exact={true}>
+                    <CartItemList/>
+                </Route>
+                <Route path="/cartItems/:id" exact={true}>
+                    <CartItemFormEditor/>
                 </Route>
             </HashRouter>
         </div>

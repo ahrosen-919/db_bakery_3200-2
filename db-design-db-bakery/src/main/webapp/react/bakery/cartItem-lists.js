@@ -22,9 +22,10 @@ const history = useHistory()
                                cartItems.map(cartItem =>
                                   <li key={cartItem.id}>
                                    <Link to={`/cartItems/${cartItem.id}`}>
-                                      {cartItem.quantity},
-                                      {cartItem.customer.id},
-                                      {cartItem.bakedGood.id}
+                                       Cart Item ID: {cartItem.id},
+                                      Cart Item Quantity: {cartItem.quantity},
+                                      Cart Item Customer ID: {cartItem.customer.id},
+                                      Cart Item Baked Good ID: {cartItem.bakedGood.id}
                                       </Link>
                                   </li>)
                             }

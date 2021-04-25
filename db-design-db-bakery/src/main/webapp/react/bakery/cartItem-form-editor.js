@@ -14,7 +14,6 @@ const CartItemFormEditor = () => {
         }
     }, []);
 
-
  const findCartItemById = (id) => {
          cartItemService.findCartItemById(id)
              .then(cartItem => setCartItem(cartItem))
@@ -38,23 +37,23 @@ const CartItemFormEditor = () => {
         <div>
             <h2>CartItem Editor</h2>
             <label>Id</label>
-            <input value={cartItem.id}/><br/>
+            <input value={cartItem.id} placeholder="Auto Generated" className="form-control"/><br/>
 
             <label>Quantity</label>
             <input onChange={(e) =>
             setCartItem(cartItem => ({...cartItem, quantity: e.target.value}))}
             value={cartItem.quantity} className="form-control"/>
 
-            <label>Baked Good</label>
+            <label>Baked Good ID</label>
             <input onChange={(e) => bakedGoodId = (e.target.value)}
             //setCartItem(cartItem =>({...cartItem, bakedGood: (e.target.value)}))}
             //value={typeof cartItem.bakedGood === 'object' ? cartItem.bakedGood.id : 0} className="form-control"/>
-            value={ cartItem.bakedGood.id } className="form-control"/>
+            value={ cartItem.bakedGood.id } className="form-control" placeholder={"Number ex: 1"}/>
 
-            <label>Customer</label>
+            <label>Customer ID</label>
             <input onChange={(e) => customerId = (e.target.value)}
             //setCartItem(cartItem => ({...cartItem, customer: (e.target.value)}))}
-            value={cartItem.customer.id} className="form-control"/>
+            value={cartItem.customer.id} className="form-control"  placeholder={"Number ex: 1"}/>
 
             <br/>
 

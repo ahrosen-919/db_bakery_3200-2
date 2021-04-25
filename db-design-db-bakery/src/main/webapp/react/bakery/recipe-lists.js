@@ -22,6 +22,7 @@ const RecipeList = () => {
                     recipes.map(recipe =>
                         <li key={recipe.id}>
                             <Link to={`/recipes/${recipe.id}`}>
+                                ID:  {recipe.id},
                                 Item: {recipe.bakedGood.name},
 
                                 Ingredient: {recipe.ingredient.name},

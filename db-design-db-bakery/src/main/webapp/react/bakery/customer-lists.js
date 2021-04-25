@@ -22,10 +22,11 @@ const history = useHistory()
                                customers.map(customer =>
                                   <li key={customer.id}>
                                    <Link to={`/customers/${customer.id}`}>
-                                      {customer.firstName},
-                                      {customer.lastName},
-                                      {customer.username},
-                                      {customer.email}
+                                       Customer ID: {customer.id},
+                                     Customer First Name: {customer.firstName},
+                                      Customer Last Name: {customer.lastName},
+                                      Customer Username: {customer.username},
+                                      Customer Email: {customer.email}
                                       </Link>
                                   </li>)
                             }

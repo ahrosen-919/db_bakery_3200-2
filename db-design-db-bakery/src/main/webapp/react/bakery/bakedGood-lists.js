@@ -22,10 +22,11 @@ const history = useHistory()
                                bakedGoods.map(bakedGood =>
                                   <li key={bakedGood.id}>
                                    <Link to={`/bakedGoods/${bakedGood.id}`}>
-                                      {bakedGood.name},
-                                      {bakedGood.price},
-                                      {bakedGood.calories},
-                                      {bakedGood.type}
+                                       Baked Good ID: {bakedGood.id},
+                                      Baked Good Name: {bakedGood.name},
+                                      Baked Good Price: {bakedGood.price},
+                                      Baked Good Calories: {bakedGood.calories},
+                                      Baked Good Type: {bakedGood.type}
                                       </Link>
                                   </li>)
                             }

@@ -31,7 +31,7 @@ const IngredientFormEditor = () => {
         <div>
             <h2>Ingredient Editor</h2>
             <label>Id</label>
-            <input value={ingredient.id}/><br/>
+            <input value={ingredient.id} placeholder="Auto Generated" className="form-control"/><br/>
 
             <label>Name</label>
             <input onChange={(e) =>

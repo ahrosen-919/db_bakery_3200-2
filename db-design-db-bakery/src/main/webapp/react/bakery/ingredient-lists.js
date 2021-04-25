@@ -22,10 +22,10 @@ const IngredientList = () => {
                     ingredients.map(ingredient =>
                         <li key={ingredient.id}>
                             <Link to={`/ingredients/${ingredient.id}`}>
-                                {ingredient.id},
-                                {ingredient.name},
-                                {ingredient.price},
-                                {ingredient.brand}
+                                Ingredient ID: {ingredient.id},
+                                Ingredient Name: {ingredient.name},
+                                Ingredient Price: {ingredient.price},
+                                Ingredient Brand: {ingredient.brand}
                             </Link>
                         </li>)
                 }
