@@ -25,12 +25,12 @@ public class CartItemOrmDao {
 
     @PostMapping("/api/cartItems/{customerId}/{bakedGoodId}")
     public CartItem createCartItem(
-            @PathVariable("customerId") Integer cid,
-            @PathVariable("bakedGoodId") Integer bid,
+            @PathVariable("customerId") Integer customerId,
+            @PathVariable("bakedGoodId") Integer bakedGoodId,
             @RequestBody CartItem cartItem) {
 
-        cartItem.setCustomer(customerRepository.findCustomerById(cid));
-        cartItem.setBakedGood(bakedGoodRepository.findBakedGoodById(bid));
+        cartItem.setCustomer(customerRepository.findCustomerById(customerId));
+        cartItem.setBakedGood(bakedGoodRepository.findBakedGoodById(bakedGoodId));
         ;return cartItemRepository.save(cartItem);
     }
 
@@ -45,16 +45,14 @@ public class CartItemOrmDao {
         return cartItemRepository.findCartItemById(id);
     }
 
-    @PutMapping("/api/cartItems/{cartItemId}/{customerId}/{bakedGoodId}")
+    @PutMapping("/api/cartItems/{cartItemId}")
     public CartItem updateCartItem(
             @PathVariable("cartItemId") Integer id,
-            @PathVariable("customerId") Integer cid,
-            @PathVariable("bakedGoodId") Integer bid,
             @RequestBody CartItem cartItemUpdates) {
         CartItem cartItem = cartItemRepository.findCartItemById(id);
         cartItem.setQuantity(cartItemUpdates.getQuantity());
-        cartItem.setCustomer(customerRepository.findCustomerById(cid));
-        cartItem.setBakedGood(bakedGoodRepository.findBakedGoodById(bid));
+        cartItem.setCustomer(cartItem.getCustomer());
+        cartItem.setBakedGood(cartItem.getBakedGood());
 
         return cartItemRepository.save(cartItem);
     }

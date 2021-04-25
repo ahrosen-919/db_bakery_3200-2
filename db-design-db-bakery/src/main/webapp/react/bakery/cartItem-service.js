@@ -23,8 +23,8 @@ export const deleteCartItem = (id) =>
 
 
 // TODO: create a new CartItem
-export const createCartItem = (cid, bid, cartItem) =>
-    fetch(`${CART_ITEMS_URL}/${cid}/${bid}`, {
+export const createCartItem = (customerId, bakedGoodId, cartItem) =>
+    fetch(`${CART_ITEMS_URL}/${customerId}/${bakedGoodId}`, {
         method: 'POST',
         body: JSON.stringify(cartItem),
         headers: {'content-type': 'application/json'}
@@ -33,8 +33,8 @@ export const createCartItem = (cid, bid, cartItem) =>
 
 
 // TODO: update a cartItem by their ID
-export const updateCartItem = (cid, bid, id, cartItem) =>
-    fetch(`${CART_ITEMS_URL}/${id}/${cid}/${bid}`, {
+export const updateCartItem = (id, cartItem) =>
+    fetch(`${CART_ITEMS_URL}/${id}`, {
         method: 'PUT',
         body: JSON.stringify(cartItem),
         headers: {'content-type': 'application/json'}

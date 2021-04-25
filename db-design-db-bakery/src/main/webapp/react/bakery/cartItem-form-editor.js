@@ -3,8 +3,8 @@ const {useState, useEffect} = React;
 const {useParams, useHistory} = window.ReactRouterDOM;
 const CartItemFormEditor = () => {
  const {id} = useParams()
- var {cid} = useState({})
- var {bid} = useState({})
+ var {customerId} = useState({})
+ var {bakedGoodId} = useState({})
    const [cartItem, setCartItem] = useState({bakedGood:{id:null}, customer:{id:null}})
    useEffect(() => {
         if(id !== "new") {
@@ -23,12 +23,12 @@ const CartItemFormEditor = () => {
                      cartItemService.deleteCartItem(id)
                          .then(() => history.back())
 
-                         const createCartItem = (cid, bid, cartItem) =>
-                                 cartItemService.createCartItem(cid, bid, cartItem)
+                         const createCartItem = (customerId, bakedGoodId, cartItem) =>
+                                 cartItemService.createCartItem(customerId, bakedGoodId, cartItem)
                                      .then(() => history.back())
 
-                                      const updateCartItem = (cid, bid, id, newCartItem) =>
-                                             cartItemService.updateCartItem(cid, bid, id, newCartItem)
+                                      const updateCartItem = (id, newCartItem) =>
+                                             cartItemService.updateCartItem(id, newCartItem)
                                                  .then(() => history.back())
 
 
@@ -46,13 +46,13 @@ const CartItemFormEditor = () => {
             value={cartItem.quantity} className="form-control"/>
 
             <label>Baked Good</label>
-            <input onChange={(e) => bid = (e.target.value)}
+            <input onChange={(e) => bakedGoodId = (e.target.value)}
             //setCartItem(cartItem =>({...cartItem, bakedGood: (e.target.value)}))}
             //value={typeof cartItem.bakedGood === 'object' ? cartItem.bakedGood.id : 0} className="form-control"/>
             value={ cartItem.bakedGood.id } className="form-control"/>
 
             <label>Customer</label>
-            <input onChange={(e) => cid = (e.target.value)}
+            <input onChange={(e) => customerId = (e.target.value)}
             //setCartItem(cartItem => ({...cartItem, customer: (e.target.value)}))}
             value={cartItem.customer.id} className="form-control"/>
 
@@ -62,9 +62,9 @@ const CartItemFormEditor = () => {
             className="btn btn-warning">Cancel</button>
 
             <button onClick={() => deleteCartItem(cartItem.id)} className="btn btn-danger">Delete</button>
-            <button onClick={() => updateCartItem(cid, bid, cartItem.id, cartItem)}
+            <button onClick={() => updateCartItem(cartItem.id, cartItem)}
             className="btn btn-primary">Save</button>
-            <button onClick={() => createCartItem(cid, bid, cartItem)}
+            <button onClick={() => createCartItem(customerId, bakedGoodId, cartItem)}
                         className="btn btn-primary">Create</button>
         </div>
     )
