@@ -1,12 +1,14 @@
 import recipeService from "./recipe-service"
 const {useState, useEffect} = React;
-const {useParams, useHistory} = window.ReactRouterDOM;
+const {Link, useParams, useHistory} = window.ReactRouterDOM;
+
 
 const RecipeFormEditor = () => {
     const {id} = useParams()
-    var bakedGoodId = useState({})
-    var ingredientId = useState({})
+    let bakedGoodId = useState({})
+    let ingredientId = useState({})
     const [recipe, setRecipe] = useState({bakedGood:{id:null}, ingredient:{id:null}})
+
     useEffect(() => {
         if(id !== "new") {
             findRecipeById(id)
@@ -15,6 +17,19 @@ const RecipeFormEditor = () => {
         }
     }, []);
 
+    const checkBakedLink = () => {
+        let path;
+        recipe.bakedGood.id === null ?  path = "/bakedGoods"
+            : path = "/bakedGoods/" + recipe.bakedGood.id;
+        return path;
+    }
+
+    const checkIngredLink = () => {
+        let path;
+        recipe.ingredient.id === null ?  path = "/ingredients"
+            : path = "/ingredients/" + recipe.ingredient.id;
+        return path;
+    }
     const findRecipeById = (id) => {
         recipeService.findRecipeById(id)
             .then(recipe => setRecipe(recipe))
@@ -59,6 +74,15 @@ const RecipeFormEditor = () => {
             <button onClick={() => updateRecipe(recipe.id, recipe)}
                     className="btn btn-primary">Save</button>
             <button onClick={() => createRecipe(ingredientId, bakedGoodId, recipe)} className="btn btn-success">Create</button>
+            <br/>
+            <Link to={checkIngredLink()}>
+                Ingredient Information
+            </Link>
+            <br/>
+            <Link to={checkBakedLink()}>
+                 Baked Goods Information
+            </Link>
+
         </div>
     )
 }
