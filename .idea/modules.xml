@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/db_bakery_3200-2.iml" filepath="$PROJECT_DIR$/.idea/db_bakery_3200-2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/db-design-db-bakery/spring-template.iml" filepath="$PROJECT_DIR$/db-design-db-bakery/spring-template.iml" />
     </modules>
   </component>
 </project>

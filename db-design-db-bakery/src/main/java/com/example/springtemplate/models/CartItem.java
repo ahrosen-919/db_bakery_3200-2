@@ -13,12 +13,11 @@ public class CartItem {
     private Integer quantity;
 
     @ManyToOne
-    @JsonIgnore
+    @JoinColumn(name = "customer_id", referencedColumnName = "id")
     private Customer customer;
     @ManyToOne
-    @JsonIgnore
+    @JoinColumn(name = "bakedGood_id", referencedColumnName = "id")
     private BakedGood bakedGood;
-
 
 
     public CartItem(Integer quantity, BakedGood bakedGood, Customer customer) {
