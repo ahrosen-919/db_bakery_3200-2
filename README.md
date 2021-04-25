@@ -10,6 +10,7 @@ For our project, we created a bakery with customers, baked goods, and ingredient
 ### UML Diagram
 UML Diagram is located in the same folder as this file, at:
 "db_bakery_3200\db_design_final_project_UML.pdf"
+[db_design_pdf](https://github.com/ahrosen-919/db_bakery_3200-2/blob/416b1cda1555cd5b6f3e897b895a72709ef83658/db_design_final_project_UML.pdf.pdf)
 
 #### User Model
 Our "user" is the customer of the bakery. A customer has a first name, last name, username, password, and email,
