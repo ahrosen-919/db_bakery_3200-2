@@ -1,10 +1,13 @@
 // TODO: declare URL where server listens for HTTP requests
 const CUSTOMERS_URL = "http://localhost:8080/api/customers"
+const CART_URL = "http://localhost:8080/api/cartItems"
 
 // TODO: retrieve all customers from the server
 export const findAllCustomers = () =>
     fetch(`${CUSTOMERS_URL}`)
         .then(response => response.json())
+
+
 
 
 // TODO: retrieve a single Customer by their ID
@@ -39,8 +42,11 @@ export const updateCustomer = (id, customer) =>
     })
     .then(response => response.json())
 
+// TODO: find all cart items for a customer
+export const customerItems = (id) =>
+    fetch(`${CUSTOMERS_URL}/cartItems/customers/${id}`).then(response => response.json())
 
 // TODO: export all functions as the API to this service
 export default {
-    findAllCustomers, findCustomerById, deleteCustomer, createCustomer, updateCustomer
+    findAllCustomers, findCustomerById, deleteCustomer, createCustomer, updateCustomer, customerItems
 }

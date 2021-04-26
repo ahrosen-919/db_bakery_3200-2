@@ -57,6 +57,11 @@ public class CartItemOrmDao {
         return cartItemRepository.save(cartItem);
     }
 
+    //@PutMapping("/api/customers/cartItems/customers/{customerId}")
+   // public List<CartItem> findCartItemsForCustomer(
+    //        @PathVariable("customerId") Integer id) {
+     //   return cartItemRepository.findCartItemsByCustomer(id);
+   // }
 
     @DeleteMapping("/api/cartItems/{cartItemId}")
     public void deleteCartItem(

@@ -1,65 +1,23 @@
+/*         this.name = name;
+this.price = price;
+this.calories = calories;
+this.type = type;
+this.vegan = vegan;
+this.glutenFree = glutenFree;
+this.recipes = recipes;
+this.cartItems = cartItems;*/
+
 import bakedGoodService from "./bakedGood-service"
-import cartItemService from "./cartItem-service"
-import {recipeService, findAllRecipes} from "./recipe-service"
 const {useState, useEffect} = React;
 const {Link, useParams, useHistory} = window.ReactRouterDOM;
-
 const BakedGoodFormEditor = () => {
-    const {id} = useParams()
-    const [bakedGood, setBakedGood] = useState({})
-    const [cartItems, setCartItems] = useState([])
-    const [recipes, setRecipes] = useState([])
+const {id} = useParams()
+  const [bakedGood, setBakedGood] = useState({})
   useEffect(() => {
        if(id !== "new") {
            findBakedGoodById(id)
-           findAllCartItems();
-           findAllRecipes()
        }
    }, []);
-
-    const findAllCartItems = () =>
-        cartItemService.findAllCartItems()
-            .then(cartItems => setCartItems(cartItems))
-
-    const findAllRecipes = () =>
-        recipeService.findAllRecipes()
-            .then(recipes => setRecipes(recipes))
-
-    const FilterBakedGoodItems = () => {
-        {
-            let id = bakedGood.id;
-            return cartItems.filter(cartItem => id === cartItem.bakedGood.id).map(cartItem =>
-                <ul className="list-group">
-                    <li key={cartItem.id}>
-                        <Link to={`/cartItems/${cartItem.id}`}>
-                            Cart Item ID: {cartItem.id},
-                            Cart Item Quantity: {cartItem.quantity},
-                            Cart Item Customer ID: {cartItem.customer.id},
-                            Cart Item Baked Good ID: {cartItem.bakedGood.id}
-                        </Link>
-                    </li>
-                    <br/>
-                </ul>)
-        }
-    }
-
-    const FilterRecipeItems = () => {
-        {
-            let id = bakedGood.id;
-            return recipes.filter(recipe => id === recipe.bakedGood.id).map(recipe =>
-                <ul className="list-group">
-                    <li key={recipe.id}>
-                        <Link to={`/recipes/${recipe.id}`}>
-                            Recipe ID: {recipe.id},
-                            Recipe Amount: {recipe.amount},
-                            Recipe Ingredient ID: {recipe.ingredient.id},
-                            Recipe Baked Good ID: {recipe.bakedGood.id}
-                        </Link>
-                    </li>
-                    <br/>
-                </ul>)
-        }
-    }
 
 
 const findBakedGoodById = (id) => {
@@ -126,8 +84,16 @@ const findBakedGoodById = (id) => {
            <button onClick={() => updateBakedGood(bakedGood.id, bakedGood)}
            className="btn btn-primary">Save</button>
            <button onClick={() => createBakedGood(bakedGood)} className="btn btn-success">Create</button>
-            <FilterBakedGoodItems/>
-            <FilterRecipeItems />
+
+
+           <Link to={`cartItems/bakedGoods/${bakedGood.id}`}>
+           Cart Items Information
+           </Link>
+
+           <Link to={`recipes/bakedGoods/${bakedGood.id}`}>
+            Recipes Information
+            </Link>
+
        </div>
    )
 }

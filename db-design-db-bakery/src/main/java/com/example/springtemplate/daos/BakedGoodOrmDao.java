@@ -2,6 +2,10 @@ package com.example.springtemplate.daos;
 
 import com.example.springtemplate.models.BakedGood;
 import com.example.springtemplate.repositories.BakedGoodRepository;
+import com.example.springtemplate.models.CartItem;
+import com.example.springtemplate.repositories.CartItemRepository;
+import com.example.springtemplate.models.Recipe;
+import com.example.springtemplate.repositories.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -11,6 +15,10 @@ import java.util.List;
 public class BakedGoodOrmDao {
     @Autowired
     BakedGoodRepository bakedGoodRepository;
+    @Autowired
+    CartItemRepository cartItemRepository;
+    @Autowired
+    RecipeRepository recipeRepository;
 
     @PostMapping("/api/bakedGoods")
     public BakedGood createBakedGood(@RequestBody BakedGood bakedGood) {
@@ -50,5 +58,17 @@ public class BakedGoodOrmDao {
     public void deleteBakedGood(
             @PathVariable("bakedGoodId") Integer id) {
         bakedGoodRepository.deleteById(id);
+    }
+
+    @GetMapping("/api/bakedGoods/cartItems/bakedGoods/{bakedGoodId}")
+    public List<CartItem> findCartItemByBakedGoods(
+           @PathVariable("bakedGoodId") Integer id){
+        return cartItemRepository.findCartItemsByBakedGood(id);
+    }
+
+    @GetMapping("/api/bakedGoods/recipes/bakedGoods/{bakedGoodId}")
+    public List<Recipe> findRecipeByBakedGoods(
+            @PathVariable("bakedGoodId") Integer id){
+        return recipeRepository.findRecipesByBakedGood(id);
     }
 }

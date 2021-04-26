@@ -15,4 +15,12 @@ public interface RecipeRepository
     @Query(value = "SELECT * FROM recipes WHERE id=:recipeId",
             nativeQuery = true)
     public Recipe findRecipeById(@Param("recipeId") Integer id);
+
+    @Query(value = "SELECT * FROM recipes WHERE baked_good_id=:bakedGoodId",
+            nativeQuery = true)
+    public List<Recipe> findRecipesByBakedGood(@Param("bakedGoodId") Integer id);
+
+    @Query(value = "SELECT * FROM recipes WHERE ingredient_id=:ingredientId",
+            nativeQuery = true)
+    public List<Recipe> findRecipesByIngredient(@Param("ingredientId") Integer id);
 }

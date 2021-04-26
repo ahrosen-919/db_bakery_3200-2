@@ -1,4 +1,9 @@
 import CustomerList from "./customer-lists";
+import CustomerCartItems from "./customer-cartItems";
+import BakedGoodCartItems from "./bakedGood-cartItems";
+import BakedGoodRecipes from "./bakedGood-recipes";
+import IngredientRecipes from "./ingredient-recipes";
+
 import CustomerFormEditor from "./customer-form-editor";
 import IngredientList from "./ingredient-lists";
 import IngredientFormEditor from "./ingredient-form-editor";
@@ -44,6 +49,18 @@ const App = () => {
                 </Route>
                 <Route path="/cartItems/:id" exact={true}>
                     <CartItemFormEditor/>
+                </Route>
+                <Route path="/customers/cartItems/customers/:customerId" exact={true}>
+                    <CustomerCartItems/>
+                </Route>
+                <Route path="/bakedGoods/cartItems/bakedGoods/:bakedGoodId" exact={true}>
+                    <BakedGoodCartItems/>
+                </Route>
+                <Route path="/bakedGoods/recipes/bakedGoods/:bakedGoodId" exact={true}>
+                    <BakedGoodRecipes/>
+                </Route>
+                <Route path="/ingredients/recipes/ingredients/:ingredientId" exact={true}>
+                    <IngredientRecipes/>
                 </Route>
             </HashRouter>
         </div>

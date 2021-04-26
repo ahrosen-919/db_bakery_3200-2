@@ -1,6 +1,8 @@
 package com.example.springtemplate.daos;
 
 import com.example.springtemplate.models.Ingredient;
+import com.example.springtemplate.models.Recipe;
+import com.example.springtemplate.repositories.RecipeRepository;
 import com.example.springtemplate.repositories.IngredientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +13,8 @@ import java.util.List;
 public class IngredientOrmDao {
     @Autowired
     IngredientRepository ingredientRepository;
+    @Autowired
+    RecipeRepository recipeRepository;
 
     @PostMapping("/api/ingredients")
     public Ingredient createIngredient(@RequestBody Ingredient ingredient) {
@@ -44,5 +48,11 @@ public class IngredientOrmDao {
     public void deleteIngredient(
             @PathVariable("ingredientId") Integer id) {
         ingredientRepository.deleteById(id);
+    }
+
+    @GetMapping("/api/ingredients/recipes/ingredients/{ingredientId}")
+    public List<Recipe> findRecipeByIngredients(
+            @PathVariable("ingredientId") Integer id){
+        return recipeRepository.findRecipesByIngredient(id);
     }
 }

@@ -1,40 +1,16 @@
 import customerService from "./customer-service"
-import cartItemService from "./cartItem-service"
 const {useState, useEffect} = React;
 const {Link, useParams, useHistory} = window.ReactRouterDOM;
-
 const CustomerFormEditor = () => {
-    const {id} = useParams()
+ const {id} = useParams()
    const [customer, setCustomer] = useState({})
-    const [cartItems, setCartItems] = useState([])
    useEffect(() => {
         if(id !== "new") {
-            findCustomerById(id),
-            findAllCartItems()
+            findCustomerById(id)
         }
     }, []);
 
-    const findAllCartItems = () =>
-        cartItemService.findAllCartItems()
-            .then(cartItems => setCartItems(cartItems))
-
-const CustomerItems = () => {
-    {
-        let id = customer.id;
-        return cartItems.filter(cartItem => id === cartItem.customer.id).map(cartItem =>
-            <ul className="list-group">
-            <li key={cartItem.id}>
-                    <Link to={`/cartItems/${cartItem.id}`}>
-                        Cart Item ID: {cartItem.id},
-                        Cart Item Quantity: {cartItem.quantity},
-                        Cart Item Customer ID: {cartItem.customer.id},
-                        Cart Item Baked Good ID: {cartItem.bakedGood.id}
-                    </Link>
-                </li>
-                <br/>
-            </ul>)
-}
-}
+const getItems = (id) => {customerService.customerItems(id)}
 
  const findCustomerById = (id) => {
          customerService.findCustomerById(id)
@@ -107,7 +83,10 @@ const CustomerItems = () => {
             className="btn btn-primary">Save</button>
             <button onClick={() => createCustomer(customer)} className="btn btn-success">Create</button>
 
-            <CustomerItems />
+
+            <Link to={`cartItems/customers/${customer.id}`}>
+            Cart Items Information
+            </Link>
         </div>
     )
 }

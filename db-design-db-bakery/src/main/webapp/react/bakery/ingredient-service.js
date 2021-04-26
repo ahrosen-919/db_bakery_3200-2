@@ -39,8 +39,13 @@ export const updateIngredient = (id, ingredient) =>
     })
         .then(response => response.json())
 
+        // TODO: find all recipes for a ingredient
+        export const ingredientRecipes = (id) =>
+            fetch(`${INGREDIENTS_URL}/recipes/ingredients/${id}`).then(response => response.json())
+
+
 
 // TODO: export all functions as the API to this service
 export default {
-    findAllIngredients, findIngredientById, deleteIngredient, createIngredient, updateIngredient
+    findAllIngredients, findIngredientById, deleteIngredient, createIngredient, updateIngredient, ingredientRecipes
 }

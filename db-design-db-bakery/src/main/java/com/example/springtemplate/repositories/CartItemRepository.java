@@ -15,5 +15,10 @@ public interface CartItemRepository
     @Query(value = "SELECT * FROM cart_items WHERE id=:cartItemId",
             nativeQuery = true)
     public CartItem findCartItemById(@Param("cartItemId") Integer id);
-
+    @Query(value = "SELECT * FROM cart_items WHERE customer_id=:customerId",
+            nativeQuery = true)
+    public List<CartItem> findCartItemsByCustomer(@Param("customerId") Integer id);
+    @Query(value = "SELECT * FROM cart_items WHERE baked_good_id=:bakedGoodId",
+            nativeQuery = true)
+    public List<CartItem> findCartItemsByBakedGood(@Param("bakedGoodId") Integer id);
 }

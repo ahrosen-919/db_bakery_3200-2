@@ -41,8 +41,15 @@ export const updateBakedGood = (id, bakedGood) =>
     })
     .then(response => response.json())
 
+// TODO: find all cart items for a baked good
+export const bakedGoodItems = (id) =>
+    fetch(`${BAKED_GOODS_URL}/cartItems/bakedGoods/${id}`).then(response => response.json())
+
+// TODO: find all recipes for a baked good
+export const bakedGoodRecipes = (id) =>
+    fetch(`${BAKED_GOODS_URL}/recipes/bakedGoods/${id}`).then(response => response.json())
 
 // TODO: export all functions as the API to this service
 export default {
-    findAllBakedGoods, findBakedGoodById, deleteBakedGood, createBakedGood, updateBakedGood
+    findAllBakedGoods, findBakedGoodById, deleteBakedGood, createBakedGood, updateBakedGood, bakedGoodItems, bakedGoodRecipes
 }

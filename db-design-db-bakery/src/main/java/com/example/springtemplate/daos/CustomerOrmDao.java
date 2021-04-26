@@ -2,6 +2,8 @@ package com.example.springtemplate.daos;
 
 import com.example.springtemplate.models.Customer;
 import com.example.springtemplate.repositories.CustomerRepository;
+import com.example.springtemplate.models.CartItem;
+import com.example.springtemplate.repositories.CartItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -11,6 +13,8 @@ import java.util.List;
 public class CustomerOrmDao {
     @Autowired
     CustomerRepository customerRepository;
+    @Autowired
+    CartItemRepository cartItemRepository;
 
     @PostMapping("/api/customers")
     public Customer createCustomer(@RequestBody Customer customer) {
@@ -40,7 +44,6 @@ public class CustomerOrmDao {
         customer.setEmail(customerUpdates.getEmail());
         customer.setDateOfBirth(customerUpdates.getDateOfBirth());
         customer.setRewards(customerUpdates.isRewards());
-        customer.setCartItems(customerUpdates.getCartItems());
         return customerRepository.save(customer);
     }
 
@@ -48,5 +51,11 @@ public class CustomerOrmDao {
     public void deleteCustomer(
             @PathVariable("customerId") Integer id) {
         customerRepository.deleteById(id);
+    }
+
+    @GetMapping("/api/customers/cartItems/customers/{customerId}")
+    public List<CartItem> findCartItemByCustomer(
+            @PathVariable("customerId") Integer id) {
+        return cartItemRepository.findCartItemsByCustomer(id);
     }
 }

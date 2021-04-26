@@ -92,7 +92,7 @@ public class Customer {
     }
 
     public List<CartItem> getCartItems() {
-        return this.cartItems;
+        return cartItems;
     }
 
     public void setCartItems(List<CartItem> cartItems) {
