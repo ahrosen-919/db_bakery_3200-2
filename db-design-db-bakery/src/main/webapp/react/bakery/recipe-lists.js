@@ -10,7 +10,7 @@ const RecipeList = () => {
     }, [])
     const findAllRecipes = () =>
         recipeService.findAllRecipes()
-            .then(recipes => {setRecipes(recipes); console.log(recipes)})
+            .then(recipes => {setRecipes(recipes)})
     return(
         <div>
             <h2>Recipe List</h2>

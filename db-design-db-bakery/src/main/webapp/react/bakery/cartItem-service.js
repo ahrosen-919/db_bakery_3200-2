@@ -7,8 +7,6 @@ export const findAllCartItems = () =>
         .then(response => response.json())
 
 
-
-
 // TODO: retrieve a single CartItem by their ID
 export const findCartItemById = (id) =>
             fetch(`${CART_ITEMS_URL}/${id}`)

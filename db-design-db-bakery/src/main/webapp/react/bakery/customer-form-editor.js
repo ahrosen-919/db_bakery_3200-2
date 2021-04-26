@@ -1,15 +1,15 @@
 import customerService from "./customer-service"
 import cartItemService from "./cartItem-service"
 const {useState, useEffect} = React;
-const {Link, useHistory} = window.ReactRouterDOM;
+const {Link, useParams, useHistory} = window.ReactRouterDOM;
 
 const CustomerFormEditor = () => {
-
+    const {id} = useParams()
    const [customer, setCustomer] = useState({})
     const [cartItems, setCartItems] = useState([])
    useEffect(() => {
         if(id !== "new") {
-            findCustomerById(id)
+            findCustomerById(id),
             findAllCartItems()
         }
     }, []);
