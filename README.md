@@ -51,3 +51,6 @@ customerIds or bakedGoodIds when creating a new CartItem, or else the api will c
 using an id that does not exist. A user MUST use preexisting ingredientIds or bakedGoodIds when creating a new Recipe, or else
 the api will crash attempting to get an ingredient or baked good using an id that does not exist. To select a type for a 
 Baked Good, there is a drop down menu that lists the four options of the Type enumeration.
+
+### Note*
+Remember to change the application properties to match the correct database connection settings.(Ex password)
