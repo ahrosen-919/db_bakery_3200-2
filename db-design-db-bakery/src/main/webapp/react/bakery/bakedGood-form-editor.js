@@ -1,24 +1,41 @@
-/*         this.name = name;
-this.price = price;
-this.calories = calories;
-this.type = type;
-this.vegan = vegan;
-this.glutenFree = glutenFree;
-this.recipes = recipes;
-this.cartItems = cartItems;*/
+
 
 import bakedGoodService from "./bakedGood-service"
+import cartItemService, {findAllCartItems} from "./cartItem-service";
 const {useState, useEffect} = React;
 const {useParams, useHistory} = window.ReactRouterDOM;
 const BakedGoodFormEditor = () => {
 const {id} = useParams()
   const [bakedGood, setBakedGood] = useState({})
+    const [cartItems, setCartItems] = useState({})
   useEffect(() => {
        if(id !== "new") {
            findBakedGoodById(id)
+           findAllCartItems()
        }
    }, []);
 
+    const findAllCartItems = () =>
+        cartItemService.findAllCartItems()
+            .then(cartItems => setCartItems(cartItems))
+
+    const BakedGoodItems = () => {
+        {
+            let id = bakedGood.id;
+            return cartItems.filter(cartItem => id === cartItem.bakedGood.id).map(cartItem =>
+                <ul className="list-group">
+                    <li key={cartItem.id}>
+                        <Link to={`/cartItems/${cartItem.id}`}>
+                            Cart Item ID: {cartItem.id},
+                            Cart Item Quantity: {cartItem.quantity},
+                            Cart Item Customer ID: {cartItem.customer.id},
+                            Cart Item Baked Good ID: {cartItem.bakedGood.id}
+                        </Link>
+                    </li>
+                    <br/>
+                </ul>)
+        }
+    }
 
 const findBakedGoodById = (id) => {
         bakedGoodService.findBakedGoodById(id)
@@ -84,6 +101,7 @@ const findBakedGoodById = (id) => {
            <button onClick={() => updateBakedGood(bakedGood.id, bakedGood)}
            className="btn btn-primary">Save</button>
            <button onClick={() => createBakedGood(bakedGood)} className="btn btn-success">Create</button>
+            <BakedGoodItems/>
        </div>
    )
 }

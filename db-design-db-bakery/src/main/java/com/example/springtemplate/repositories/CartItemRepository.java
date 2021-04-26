@@ -15,4 +15,5 @@ public interface CartItemRepository
     @Query(value = "SELECT * FROM cart_items WHERE id=:cartItemId",
             nativeQuery = true)
     public CartItem findCartItemById(@Param("cartItemId") Integer id);
+
 }

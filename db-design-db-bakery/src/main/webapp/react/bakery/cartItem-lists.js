@@ -1,9 +1,11 @@
-const {Link, useHistory} = window.ReactRouterDOM;
+const {Link, useParams, useHistory} = window.ReactRouterDOM;
 import cartItemService from "./cartItem-service"
 const { useState, useEffect } = React;
 
 const CartItemList = () => {
-const history = useHistory()
+    const history = useHistory()
+    const {customerId} = useParams()
+    console.log(customerId)
  const [cartItems, setCartItems] = useState([])
     useEffect(() => {
         findAllCartItems()

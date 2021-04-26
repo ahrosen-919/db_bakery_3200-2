@@ -40,6 +40,7 @@ public class CustomerOrmDao {
         customer.setEmail(customerUpdates.getEmail());
         customer.setDateOfBirth(customerUpdates.getDateOfBirth());
         customer.setRewards(customerUpdates.isRewards());
+        customer.setCartItems(customerUpdates.getCartItems());
         return customerRepository.save(customer);
     }
 

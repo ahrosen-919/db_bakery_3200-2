@@ -1,15 +1,40 @@
 import customerService from "./customer-service"
+import cartItemService from "./cartItem-service"
 const {useState, useEffect} = React;
-const {useParams, useHistory} = window.ReactRouterDOM;
+const {Link, useHistory} = window.ReactRouterDOM;
+
 const CustomerFormEditor = () => {
- const {id} = useParams()
+
    const [customer, setCustomer] = useState({})
+    const [cartItems, setCartItems] = useState([])
    useEffect(() => {
         if(id !== "new") {
             findCustomerById(id)
+            findAllCartItems()
         }
     }, []);
 
+    const findAllCartItems = () =>
+        cartItemService.findAllCartItems()
+            .then(cartItems => setCartItems(cartItems))
+
+const CustomerItems = () => {
+    {
+        let id = customer.id;
+        return cartItems.filter(cartItem => id === cartItem.customer.id).map(cartItem =>
+            <ul className="list-group">
+            <li key={cartItem.id}>
+                    <Link to={`/cartItems/${cartItem.id}`}>
+                        Cart Item ID: {cartItem.id},
+                        Cart Item Quantity: {cartItem.quantity},
+                        Cart Item Customer ID: {cartItem.customer.id},
+                        Cart Item Baked Good ID: {cartItem.bakedGood.id}
+                    </Link>
+                </li>
+                <br/>
+            </ul>)
+}
+}
 
  const findCustomerById = (id) => {
          customerService.findCustomerById(id)
@@ -81,6 +106,8 @@ const CustomerFormEditor = () => {
             <button onClick={() => updateCustomer(customer.id, customer)}
             className="btn btn-primary">Save</button>
             <button onClick={() => createCustomer(customer)} className="btn btn-success">Create</button>
+
+            <CustomerItems />
         </div>
     )
 }
