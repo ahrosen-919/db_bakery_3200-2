@@ -57,9 +57,10 @@ const IngredientFormEditor = () => {
             <button onClick={() => updateIngredient(ingredient.id, ingredient)}
                     className="btn btn-primary">Save</button>
             <button onClick={() => createIngredient(ingredient)} className="btn btn-success">Create</button>
-                       <Link to={`recipes/ingredients/${ingredient.id}`}>
-                        Recipes Information
-                        </Link>
+            <br/>
+            <Link to={`recipes/ingredients/${ingredient.id}`}>
+            Recipes Information
+            </Link>
         </div>
     )
 }

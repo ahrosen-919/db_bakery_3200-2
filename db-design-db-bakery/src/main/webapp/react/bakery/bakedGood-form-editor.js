@@ -86,13 +86,14 @@ const findBakedGoodById = (id) => {
            <button onClick={() => createBakedGood(bakedGood)} className="btn btn-success">Create</button>
 
 
+           <br/>
            <Link to={`cartItems/bakedGoods/${bakedGood.id}`}>
            Cart Items Information
            </Link>
-
+           <br/>
            <Link to={`recipes/bakedGoods/${bakedGood.id}`}>
             Recipes Information
-            </Link>
+           </Link>
 
        </div>
    )
